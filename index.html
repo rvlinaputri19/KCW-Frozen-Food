@@ -915,12 +915,6 @@
         <div class="hero-btns">
           <a href="#menu" class="btn">Lihat Menu</a>
           <a
-            href="https://wa.me/6285389248806"
-            target="_blank"
-            class="btn btn-secondary"
-            >Pesan via WhatsApp</a
-          >
-          <a
             href="https://www.facebook.com/ajhie.ani.5?rdid=Ra69CQiRtq2xecBd&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17W9PxtpDA%2F#"
             target="_blank"
             class="btn btn-secondary1"
@@ -1018,40 +1012,32 @@
     </section>
 
     <!-- Contact Section -->
+    <!-- Contact Section -->
     <section class="contact-section" id="contact">
       <div class="container">
-        <h2 class="section-title">Kontak & Pesanan</h2>
+        <h2 class="section-title">Kontak & Ulasan</h2>
         <div class="contact-container">
           <div class="contact-form">
-            <h3>Form Pesanan Cepat</h3>
-            <form id="quickOrderForm">
+            <h3>Form Ulasan</h3>
+            <form id="reviewForm">
               <div class="form-group">
-                <label for="name">Nama Lengkap</label>
+                <label for="reviewName">Nama Lengkap</label>
                 <input
                   type="text"
-                  id="name"
+                  id="reviewName"
                   class="form-control"
                   placeholder="Nama Anda"
                   required
                 />
               </div>
               <div class="form-group">
-                <label for="address">Alamat Pengantaran</label>
-                <input
-                  type="text"
-                  id="address"
-                  class="form-control"
-                  placeholder="Alamat lengkap untuk pengantaran"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="message">Pesanan (opsional)</label>
+                <label for="reviewMessage">Ulasan Anda</label>
                 <textarea
-                  id="message"
+                  id="reviewMessage"
                   class="form-control"
                   rows="3"
-                  placeholder="Contoh: Bakso Ayam x2, Sosis Sapi x1, Nugget Kanzler x1"
+                  placeholder="Tulis ulasan tentang produk kami..."
+                  required
                 ></textarea>
               </div>
               <button
@@ -1059,7 +1045,7 @@
                 class="btn btn-secondary"
                 style="width: 100%"
               >
-                Kirim ke WhatsApp
+                <i class="fab fa-whatsapp"></i> Kirim Ulasan via WhatsApp
               </button>
             </form>
           </div>
@@ -1195,7 +1181,10 @@
         </div>
 
         <div class="copyright">
-          <p>&copy; 2023 KCW Frozen Food. All Rights Reserved.</p>
+          <p>
+            &copy; Program Studi Bisnis Digital UMS Rappang 2023 x KCW Frozen
+            Food. All Rights Reserved.
+          </p>
           <p>
             Jl. Gotong Royong, Tonrong Rijang, Kec. Baranti, Sulawesi Selatan
           </p>
@@ -1383,7 +1372,7 @@
       const checkoutForm = document.getElementById("checkoutForm");
       const hamburger = document.getElementById("hamburger");
       const navMenu = document.getElementById("navMenu");
-      const quickOrderForm = document.getElementById("quickOrderForm");
+      const reviewForm = document.getElementById("reviewForm"); // Perbaikan: gunakan reviewForm, bukan quickOrderForm
 
       // WhatsApp number dengan format internasional
       const whatsappNumber = "6285389248806"; // Format: 62 (kode Indonesia) + 85389248806
@@ -1396,31 +1385,31 @@
           const menuItem = document.createElement("div");
           menuItem.className = "menu-item";
           menuItem.innerHTML = `
-                    <div class="menu-img" style="background-image: url('${
-                      item.image
-                    }')"></div>
-                    <div class="menu-content">
-                        <h3 class="menu-title">${item.name}</h3>
-                        <p class="menu-desc">${item.description}</p>
-                        <div class="menu-price">Rp ${item.price.toLocaleString(
-                          "id-ID"
-                        )}</div>
-                        <div class="menu-actions">
-                            <div class="quantity-control">
-                                <button class="qty-btn minus" data-id="${
-                                  item.id
-                                }">-</button>
-                                <span class="qty" id="qty-${item.id}">0</span>
-                                <button class="qty-btn plus" data-id="${
-                                  item.id
-                                }">+</button>
-                            </div>
-                            <button class="btn btn-outline add-to-cart" data-id="${
+                <div class="menu-img" style="background-image: url('${
+                  item.image
+                }')"></div>
+                <div class="menu-content">
+                    <h3 class="menu-title">${item.name}</h3>
+                    <p class="menu-desc">${item.description}</p>
+                    <div class="menu-price">Rp ${item.price.toLocaleString(
+                      "id-ID"
+                    )}</div>
+                    <div class="menu-actions">
+                        <div class="quantity-control">
+                            <button class="qty-btn minus" data-id="${
                               item.id
-                            }">Tambah</button>
+                            }">-</button>
+                            <span class="qty" id="qty-${item.id}">0</span>
+                            <button class="qty-btn plus" data-id="${
+                              item.id
+                            }">+</button>
                         </div>
+                        <button class="btn btn-outline add-to-cart" data-id="${
+                          item.id
+                        }">Tambah</button>
                     </div>
-                `;
+                </div>
+            `;
           menuGrid.appendChild(menuItem);
         });
 
@@ -1535,18 +1524,18 @@
         notification.className = "notification";
         notification.textContent = message;
         notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background-color: var(--primary);
-                color: white;
-                padding: 15px 20px;
-                border-radius: 8px;
-                box-shadow: var(--shadow);
-                z-index: 1001;
-                transform: translateX(150%);
-                transition: transform 0.3s ease;
-            `;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 1001;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        `;
 
         document.body.appendChild(notification);
 
@@ -1585,18 +1574,18 @@
           const cartItem = document.createElement("div");
           cartItem.className = "cart-item";
           cartItem.innerHTML = `
-                    <div class="cart-item-info">
-                        <h4>${item.name}</h4>
-                        <div class="cart-item-price">Rp ${item.price.toLocaleString(
-                          "id-ID"
-                        )} x ${item.quantity}</div>
-                    </div>
-                    <div>
-                        <span class="cart-item-total">Rp ${itemTotal.toLocaleString(
-                          "id-ID"
-                        )}</span>
-                    </div>
-                `;
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <div class="cart-item-price">Rp ${item.price.toLocaleString(
+                      "id-ID"
+                    )} x ${item.quantity}</div>
+                </div>
+                <div>
+                    <span class="cart-item-total">Rp ${itemTotal.toLocaleString(
+                      "id-ID"
+                    )}</span>
+                </div>
+            `;
           cartItemsContainer.appendChild(cartItem);
         });
 
@@ -1618,18 +1607,18 @@
           const summaryItem = document.createElement("div");
           summaryItem.className = "cart-item";
           summaryItem.innerHTML = `
-                    <div class="cart-item-info">
-                        <h4>${item.name}</h4>
-                        <div class="cart-item-price">${
-                          item.quantity
-                        } x Rp ${item.price.toLocaleString("id-ID")}</div>
-                    </div>
-                    <div>
-                        <span class="cart-item-total">Rp ${itemTotal.toLocaleString(
-                          "id-ID"
-                        )}</span>
-                    </div>
-                `;
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <div class="cart-item-price">${
+                      item.quantity
+                    } x Rp ${item.price.toLocaleString("id-ID")}</div>
+                </div>
+                <div>
+                    <span class="cart-item-total">Rp ${itemTotal.toLocaleString(
+                      "id-ID"
+                    )}</span>
+                </div>
+            `;
           checkoutSummary.appendChild(summaryItem);
         });
 
@@ -1755,22 +1744,46 @@
         sendToWhatsApp(name, address, note);
       });
 
-      quickOrderForm.addEventListener("submit", (e) => {
+      // HAPUS atau KOMENTARI bagian ini karena form pesanan cepat sudah tidak ada
+      // quickOrderForm.addEventListener('submit', (e) => {
+      //     e.preventDefault();
+
+      //     const name = document.getElementById('name').value;
+      //     const address = document.getElementById('address').value;
+      //     const message = document.getElementById('message').value;
+
+      //     let whatsappMessage = `Halo KCW Frozen Food, saya ingin memesan:\n\n`;
+      //     whatsappMessage += `Nama: ${name}\n`;
+      //     whatsappMessage += `Alamat: ${address}\n`;
+
+      //     if (message.trim() !== '') {
+      //         whatsappMessage += `Pesanan: ${message}\n`;
+      //     }
+
+      //     whatsappMessage += `\nTerima kasih!`;
+
+      //     const encodedMessage = encodeURIComponent(whatsappMessage);
+      //     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      //     window.open(whatsappURL, '_blank');
+
+      //     // Reset form
+      //     quickOrderForm.reset();
+
+      //     showNotification('Form pesanan berhasil dikirim ke WhatsApp!');
+      // });
+
+      // Form Ulasan - Mengirim ke WhatsApp
+      reviewForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const name = document.getElementById("name").value;
-        const address = document.getElementById("address").value;
-        const message = document.getElementById("message").value;
+        const name = document.getElementById("reviewName").value;
+        const review = document.getElementById("reviewMessage").value;
 
-        let whatsappMessage = `Halo KCW Frozen Food, saya ingin memesan:\n\n`;
+        let whatsappMessage = `Halo KCW Frozen Food, saya ingin memberikan ulasan:\n\n`;
         whatsappMessage += `Nama: ${name}\n`;
-        whatsappMessage += `Alamat: ${address}\n`;
-
-        if (message.trim() !== "") {
-          whatsappMessage += `Pesanan: ${message}\n`;
-        }
-
-        whatsappMessage += `\nTerima kasih!`;
+        whatsappMessage += `Ulasan: ${review}\n\n`;
+        whatsappMessage += `Terima kasih atas pelayanannya!`;
 
         const encodedMessage = encodeURIComponent(whatsappMessage);
         const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
@@ -1778,9 +1791,9 @@
         window.open(whatsappURL, "_blank");
 
         // Reset form
-        quickOrderForm.reset();
+        reviewForm.reset();
 
-        showNotification("Form pesanan berhasil dikirim ke WhatsApp!");
+        showNotification("Ulasan berhasil dikirim ke WhatsApp!");
       });
 
       // Hamburger menu toggle
